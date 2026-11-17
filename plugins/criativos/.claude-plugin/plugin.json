@@ -1,0 +1,7 @@
+{
+  "name": "criativos",
+  "version": "0.1.0",
+  "description": "Producao de criativos com o Claude: pesquisa de referencias, roteiro e copy, geracao de video por IA (Seedance, Flow), edicao por script, QA e entrega com rastreio.",
+  "author": {"name": "Pedro Nunes"},
+  "keywords": ["criativos", "video", "anuncios", "seedance", "flow", "ffmpeg", "copy"]
+}

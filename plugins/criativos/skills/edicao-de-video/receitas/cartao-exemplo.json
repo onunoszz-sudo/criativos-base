@@ -1,0 +1,12 @@
+{
+  "marca": "Minha Marca",
+  "apoio": "Uma linha sobre o que o produto faz",
+  "selo": "1'",
+  "titulo": "Haz el test gratis",
+  "linhas": ["En 1 minuto descubre qué", "necesita tu cuerpo"],
+  "rodape": "en casa · a tu ritmo",
+  "botao": "Toca en más información",
+  "cor": [232, 67, 126],
+  "cor_escura": [176, 38, 92],
+  "tinta": [40, 28, 40]
+}

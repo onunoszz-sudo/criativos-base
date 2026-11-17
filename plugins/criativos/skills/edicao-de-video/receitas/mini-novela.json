@@ -1,0 +1,15 @@
+{
+  "cenas": "clips",
+  "padrao": "cena*.mp4",
+  "falas": "clips/falas.json",
+  "idioma": "es",
+  "pre": 0.12, "pos": 0.30, "sem_fala_secs": 4.0,
+  "zoom": true,
+  "resolucao": [720, 1280],
+  "musica": {"pasta": "musica", "db": -16,
+             "blocos": {"tensao": ["cena01", "cena02"], "virada": ["cena03", "cena04", "cena05"], "final": ["cena06", "fim"]}},
+  "legenda": {"fonte": "Arial Black", "tamanho": 64, "margem_baixo": 330, "maiusculas": true},
+  "cartao": {"tipo": "produto", "config": "cartao.json", "segundos": 2.2},
+  "velocidade": 1.15,
+  "saida": "CONTA_RODADA_mini-novela.mp4"
+}

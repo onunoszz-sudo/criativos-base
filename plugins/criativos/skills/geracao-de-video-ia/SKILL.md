@@ -1,0 +1,72 @@
+---
+name: geracao-de-video-ia
+description: Gera as cenas de um vídeo por IA com personagem consistente - Seedance no Dreamina (Omnirreferência com a imagem dos personagens) e Flow do Google (blueprint do avatar, body swap, Omni Flash em modo Elementos) - pelo navegador já logado do usuário, com custo em créditos dito antes de gerar, download de cada cena e conferência da pronúncia pelo whisper contra o roteiro, regerando a cena que falar errado. Use quando o usuário disser "gera as cenas", "faz no Dreamina", "faz no Seedance", "gera no Flow", "cria o avatar", "blueprint do avatar", "body swap", "regera a cena", "baixa os vídeos do Dreamina".
+---
+
+# Geração de vídeo por IA
+
+Cada geração custa crédito e tempo, e a IA erra de formas previsíveis: troca o rosto, muda a
+tatuagem, pronuncia número errado, devolve 16:9 quando a sessão cai. Esta skill gera cena por cena
+com o que já se sabe dessas ferramentas e só entrega a cena depois de conferir a fala.
+
+## Antes de começar
+1. Leia `contas/<slug>/criativo.md`: ferramenta, imagem de referência (personagens ou blueprint),
+   prefixo de estilo, formato, duração e custo por cena. Leia o roteiro aprovado (cenas e
+   `falas.json`) da `roteiro-e-copy`.
+2. **Custo antes de gerar:** número de cenas x créditos por cena (mais ~30% de margem para regerar).
+   Diga o total e espere o "sim". Sem créditos suficientes, pare: comprar é decisão do usuário.
+3. Use o navegador em que o usuário já está logado. Se a sessão caiu, peça para ele entrar; nunca
+   digite senha.
+
+## 1. Seedance (Dreamina)
+- **Configuração** (confira toda vez, porque ela volta ao padrão quando a sessão cai):
+  - modelo Seedance 2.0 Mini;
+  - Omnirreferência;
+  - 9:16;
+  - 8 s;
+  - o custo exibido (ex.: 224 créditos por cena).
+- **Referência:** a imagem dos personagens em toda cena. Se o botão de upload abrir o seletor de
+  arquivos do sistema, use um `<input type=file>` próprio e solte o arquivo na área de referência.
+- **Prompt:** prefixo de estilo + cena + "diz exatamente esta frase uma vez" + palavra difícil
+  repetida. O editor é ProseMirror: limpe o campo (selecionar tudo + apagar) antes de colar, senão
+  o texto novo se mistura com o antigo. Confira o texto do campo antes de enviar.
+- **Fila:** várias cenas podem ir para a fila de uma vez; acompanhe pela porcentagem.
+- **Download:**
+  - cada vídeo é identificado pelo texto do prompt que vem antes dele na página;
+  - baixe por `fetch` do `src` + blob + `<a download>`;
+  - o navegador pode bloquear o 2º download da mesma aba: abra **uma aba nova por vídeo**;
+  - confira o arquivo na pasta de downloads antes de seguir.
+
+## 2. Flow (Google)
+- **Avatar (uma vez por persona):**
+  1. imagem a partir de uma referência real de aparência;
+  2. **blueprint de 8 vistas**.
+  - Daí em diante, **toda imagem sai do blueprint**, nunca de outra imagem gerada: gerar em cima da
+    anterior faz o rosto derivar.
+- **Cenário:** body swap com o JSON da foto de referência + blueprint + foto de referência.
+- **Roupa:** "não mude nada na imagem, apenas a roupa" + foto da roupa.
+- **Tatuagem que mudou:** remova todas e adicione todas de novo a partir do blueprint.
+- **Vídeo:** modelo Omni Flash, modo Elementos (Ingredients), imagem da cena como quadro inicial.
+  Gere 2 ou 3 versões e escolha os melhores trechos de cada uma.
+- **Prompts por take** (duração, velocidade, câmera): use o gerador da conta se existir (ex.: o
+  gerador de animação da Appyon) e cole take a take.
+
+## 3. Conferência de cada cena
+1. Transcreva com o whisper (idioma da conta) e compare com a fala do roteiro. Rode o
+   `qa_video.py --roteiro` da `qa-de-criativo` ou compare palavra por palavra.
+2. Palavra trocada (ex.: "equipos" saiu "enquimos", "treinta" saiu "30 de"): reescreva a fala mais
+   fácil de pronunciar e **regere só aquela cena**.
+3. Confira o visual: personagem igual à referência, sem texto na tela, sem marca d'água, 9:16.
+4. Salve como `cena01.mp4`, `cena02.mp4`... na pasta de cenas do projeto. A cena antiga vai para
+   `antigas/`, nunca é apagada.
+
+## Saída
+- Tabela: cena, prompt usado, créditos gastos, fala conferida (OK ou regerada), arquivo.
+- Créditos gastos contra o orçamento aprovado.
+- Próximo passo: `edicao-de-video` com a pasta de cenas e o `falas.json`.
+
+## Guardrails
+- Nada é gerado sem o "sim" para o custo total.
+- Nunca digitar senha, aceitar termos ou comprar crédito pelo usuário.
+- Não declarar IA no anúncio se o `marca.md` decidiu assim; seguir as regras da plataforma de vídeo.
+- Personagem não pode copiar o rosto de uma pessoa real identificável.

@@ -1,0 +1,15 @@
+{
+  "cenas": [
+    {"arquivo": "takes/abre-pote.mp4", "inicio": 0.3, "fim": 2.5, "velocidade": 1.0, "realce_db": 4},
+    {"arquivo": "takes/tapete.mp4", "inicio": 0.0, "fim": 1.6, "velocidade": 1.6},
+    {"arquivo": "takes/entra-carro.mp4", "inicio": 1.0, "fim": 3.2, "velocidade": 1.0}
+  ],
+  "headline": ["IT WORKS SO FAST", "IT IS SCARY!"],
+  "bandeiras": true,
+  "musica": {"arquivo": "musica/trilha.mp3", "inicio": 23, "fator": 0.95, "db": -8, "fade_in": 0.35},
+  "riser": {"arquivo": null, "db": -12, "segundos": 1.9},
+  "snap": {"arquivo": null, "db": -4, "flash": true},
+  "sons": [{"arquivo": "sons/porta.mp3", "em": 4.6, "db": -6}],
+  "resolucao": [1080, 1920],
+  "saida": "AVATAR_prehook-carro_camisa.mp4"
+}
