@@ -47,6 +47,8 @@ lugar que a `roteiro-e-copy` consegue ler depois.
 | Prova | depoimento, demonstração, autoridade, número |
 | CTA | o que pede e onde aponta (link, comentário, quiz) |
 | Áudio | voz, música, efeitos; legenda queimada ou não |
+| Mapa de sons | cada som de ação com o segundo e a ação (tampa abrindo 0,5 s, tapete caindo 3,6 s, porta 5,9 s, snap no corte); em vídeo sem fala é o que segura a retenção, e cada um tem de existir na nossa versão |
+| Níveis | RMS de cada camada (riser, música, sons de ação, snap, voz), para copiar na montagem |
 | O que dá para levar | a estrutura, em uma linha, sem o texto original |
 
 ## Saída

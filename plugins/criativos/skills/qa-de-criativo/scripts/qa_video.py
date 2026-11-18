@@ -40,6 +40,7 @@ def main():
     ap.add_argument("--idioma", default="pt")
     ap.add_argument("--max", type=float, default=180)
     ap.add_argument("--min", type=float, default=3)
+    ap.add_argument("--lufs", type=float, default=-14, help="alvo; no pre-hook, use o LUFS da referência")
     a = ap.parse_args()
     v = a.video
     res = []
@@ -89,7 +90,7 @@ def main():
         lu = sh("ffmpeg", "-hide_banner", "-i", v, "-af", "ebur128", "-vn", "-f", "null", "-").stderr
         m = re.findall(r"I:\s+(-?[\d.]+) LUFS", lu)
         lufs = float(m[-1]) if m else 0
-        res.append(("volume", "PASSA" if -17 <= lufs <= -11 else "ATENÇÃO", f"{lufs:.1f} LUFS (alvo -14)"))
+        res.append(("volume", "PASSA" if abs(lufs - a.lufs) <= 3 else "ATENÇÃO", f"{lufs:.1f} LUFS (alvo {a.lufs:g})"))
     else:
         res.append(("áudio", "ATENÇÃO", "o vídeo não tem trilha de áudio"))
 

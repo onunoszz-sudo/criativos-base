@@ -24,7 +24,7 @@ python scripts/qa_video.py video.mp4 --roteiro roteiro.txt --idioma es --max 90
 | Primeiro quadro | brilho médio acima de 20 (não preto) |
 | Quadros pretos no meio | nenhum trecho preto de 0,3 s ou mais |
 | Áudio do gancho | no máximo 1 pacote de áudio < 0,01 s nos 3 primeiros segundos e nenhum silêncio digital (< -60 dB) de 1,2 s+ nos 5 primeiros |
-| Volume | -14 LUFS, aceita de -17 a -11 |
+| Volume | -14 LUFS (±3) nos vídeos com fala; no pre-hook, `--lufs` com o valor da referência |
 | Pronúncia | palavras do roteiro que não aparecem na fala; número por extenso contra algarismo não conta como erro |
 
 O script devolve código 1 quando algo NÃO PASSA. Rode também em cada cena gerada, antes da montagem:
@@ -38,6 +38,14 @@ Extraia um quadro a cada 2 a 3 s e o último (`ffmpeg -vf fps=0.5,scale=240:-1,t
   direita);
 - faixa do topo sem cobrir rosto ou balão de fala;
 - cartão final com o texto inteiro dentro dos limites e coerente com a oferta (mesmo preço, mesmo CTA).
+
+## 2b. Sons de ação (pre-hook e vídeo sem fala)
+Com o mapa de sons da referência (`pesquisa-de-referencias`), confira no espectrograma
+(`ffmpeg -i video.mp4 -lavfi showspectrumpic=s=1200x400:scale=log:fscale=log esp.png`):
+- cada ação visível tem o seu som, no quadro da ação (estalo = linha vertical);
+- nenhum som forte encobre outro (snap e porta no mesmo instante, por exemplo);
+- nada de chiado sintético no lugar de um som real.
+Faltou som de ação que a referência tem: NÃO PASSA.
 
 ## 3. Checagem de conteúdo
 - Nada proibido pelo `marca.md` (promessa, credencial, preço).
