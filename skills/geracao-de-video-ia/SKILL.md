@@ -40,6 +40,16 @@ com o que já se sabe dessas ferramentas e só entrega a cena depois de conferir
   - o navegador pode bloquear o 2º download da mesma aba: abra **uma aba nova por vídeo**;
   - confira o arquivo na pasta de downloads antes de seguir.
 
+- **Modo lote (menos tokens):** `scripts/dreamina_lote.js`, injetado na página de geração (Criar > Vídeo de IA >
+  modelo). Mapeado em 2026-11-18 (interface em português):
+  - `configurar({modelo:'Seedance 2.0 Mini', referencia:'Referência universal', proporcao:'9:16', res:'720P', dur:8})`
+    devolve o custo: Mini 9:16 720P 8 s = **224 créditos**. O saldo fica no canto superior direito (`saldo()`).
+  - `preencher(prompt)`, `gerar({limite})` (recusa acima do limite aprovado), `listar()`, `baixar(i)`.
+  - "Omnirreferência" agora se chama **Referência universal**. Os popovers não fecham com Esc; o script procura
+    as opções pelo texto em toda a página.
+  - A imagem de referência entra pelo `file_upload` do Claude in Chrome no campo de upload da caixa. Ainda falta
+    testar numa geração real, junto com o primeiro lote aprovado.
+
 ## 2. Flow (Google)
 - **Avatar (uma vez por persona):**
   1. imagem a partir de uma referência real de aparência;
