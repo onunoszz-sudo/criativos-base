@@ -3,6 +3,7 @@
 // Injete o arquivo inteiro uma vez por aba (javascript_tool); a cada recarga da página, injete de novo.
 // Depois chame só as funções curtas:
 //   await flowLote.estado()                         -> ajustes atuais, custo da próxima geração, crédito
+//   await flowLote.saldo()                          -> créditos da conta (anote antes e depois do lote)
 //   await flowLote.configurar({tipo:'Video', modo:'Ingredients', proporcao:'9:16', res:'720p', dur:'8s', qtd:'x1'})
 //        (em português: tipo 'Vídeo', modo 'Elementos'; res, dur, proporção e qtd são iguais)
 //   await flowLote.custo()                          -> créditos que a próxima geração vai usar
@@ -10,7 +11,7 @@
 //   await flowLote.preencher('prompt da cena')      -> escreve o prompt (substitui o anterior)
 //   await flowLote.gerar({limite: 15})              -> só clica em gerar se custo <= limite e houver crédito
 //   flowLote.listar()                               -> tiles do projeto: índice, tipo, título, progresso
-//   await flowLote.baixar(0)                        -> baixa o tile em 720p (1 download por aba: aba nova a cada um)
+//   await flowLote.baixar(0)                        -> baixa o tile no tamanho original (1 download por aba: aba nova a cada um)
 // Nenhuma função aprova gasto sozinha: o limite de créditos vem do "sim" do usuário para o lote.
 (() => {
   const T = {   // rótulos em inglês | português
@@ -23,6 +24,9 @@
     custo: /(\d+)\s*(credits?|cr[ée]ditos?)/,
     titulo: /More options|Mais opções|Reuse prompt|Reutilizar comando|Favorite|Favorito/,
     limpar: /^(Clear prompt|Apagar comando)$/,
+    original: /Original|Tamanho original/i,
+    upscale: /Upscaled|Aprimorad/i,
+    gif: /GIF/i,
   };
   const esperar = ms => new Promise(r => setTimeout(r, ms));
   const rot = x => (x.getAttribute('aria-label') || x.textContent || '').trim().replace(/\s+/g, ' ');
@@ -71,6 +75,15 @@
   }
 
   const semCredito = () => !!acha(T.semCredito);
+
+  async function saldo() {   // créditos da conta, lidos no painel do plano (PRO/ULTRA)
+    const b = document.querySelector('[aria-label$="tier"]') || acha(/Detalhes da conta|Account details/);
+    if (!b) return null;
+    esc(); await esperar(200); b.click(); await esperar(1000);
+    const m = (pop() || document.body).innerText.match(/([\d.,]+)\s*(créditos|credits)\s*do\s*Google Flow|([\d.,]+)\s*Google Flow credits/i);
+    esc(); await esperar(200);
+    return m ? Number((m[1] || m[3]).replace(/[.,]/g, '')) : null;
+  }
 
   async function estado() {
     return { ajustes: lerAjustes(), custo: await custo(), semCredito: semCredito(),
@@ -132,17 +145,20 @@
     return { gerou: true, custo: c, tilesAntes: antes, tilesDepois: listar().length };
   }
 
-  async function baixar(i, qualidade = '720p') {
-    if (!['720p', '270p'].includes(qualidade)) throw new Error('só 720p (original) ou 270p (GIF): upscale gasta crédito e precisa do "sim"');
+  // Baixa SEMPRE o tamanho original do take (o rótulo muda com a resolução gerada: um take de 360p
+  // mostra "720p Aprimorada", que é UPSCALE e gasta crédito). Por isso escolhe pelo texto "Original",
+  // nunca pela resolução. qualidade 'gif' baixa o GIF de 270p.
+  async function baixar(i, qualidade = 'original') {
+    if (!['original', 'gif'].includes(qualidade)) throw new Error('só "original" ou "gif": upscale gasta crédito e precisa do "sim"');
     const t = tilesEls()[i];
     if (!t) throw new Error('tile não existe: ' + i);
     await menuDoTile(t, 'download');
-    const q = itensMenu().find(b => rot(b).startsWith(qualidade));
-    if (!q) { esc(); throw new Error('qualidade não encontrada: ' + qualidade); }
+    const q = itensMenu().find(b => qualidade === 'gif' ? T.gif.test(rot(b)) : (T.original.test(rot(b)) && !T.upscale.test(rot(b))));
+    if (!q) { esc(); throw new Error('opção de download não encontrada: ' + qualidade); }
     q.click(); await esperar(1500);
     return 'pedido de download enviado (confira a pasta de downloads)';
   }
 
-  window.flowLote = { estado, configurar, custo, preencher, limpar, ingrediente, gerar, listar, baixar, semCredito };
+  window.flowLote = { estado, configurar, custo, preencher, limpar, ingrediente, gerar, listar, baixar, semCredito, saldo };
   return 'flowLote pronto: ' + Object.keys(window.flowLote).join(', ');
 })();

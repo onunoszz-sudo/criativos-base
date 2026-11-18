@@ -70,8 +70,10 @@ Ele roda dentro da aba já logada (Claude in Chrome) e funciona com a interface 
    `const r=x=>(x.getAttribute('aria-label')||x.textContent||'').trim(); const t=[...document.querySelectorAll('flow-grid-tile-container')][I];
    [...t.querySelectorAll('button')].find(b=>/More options|Mais opções/.test(r(b))).click(); await new Promise(z=>setTimeout(z,600));
    [...document.querySelectorAll('[role=menuitem]')].find(b=>b.textContent.trim().startsWith('download')).click(); await new Promise(z=>setTimeout(z,800));
-   [...document.querySelectorAll('[role=menuitem]')].find(b=>r(b).startsWith('720p')).click();`
-   Upscale (1080p, 4K) gasta crédito: só com "sim".
+   [...document.querySelectorAll('[role=menuitem]')].find(b=>/Original|Tamanho original/i.test(r(b))&&!/Upscaled|Aprimorad/i.test(r(b))).click();`
+   **Escolha pelo texto "Original", nunca pela resolução:** o menu muda com o take. Num take de 360p,
+   "720p Aprimorada" é upscale (aconteceu no teste de 2026-11-18). Upscale só com "sim".
+   Anote `await flowLote.saldo()` antes e depois do lote para conferir o gasto real.
 7. **Print só no fim**, para conferir o resultado; a pronúncia segue pelo whisper (passo 3).
 - **Sinais de que o Flow mudou:** "botão de ajustes não encontrado" ou "opção não encontrada". Aí olhe a
   página uma vez (print ou `read_page`) e ajuste os rótulos no topo do script (bloco `T`).
