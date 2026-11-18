@@ -12,6 +12,9 @@ lugar que a `roteiro-e-copy` consegue ler depois.
 ## Antes de começar
 1. Ache a pasta da conta (`**/contas/<slug>/`) e leia `marca.md`, `criativo.md` (idioma, formato) e
    `angulos.md` se existir (casas vazias do mapa de ângulos dizem o que procurar).
+   Onde fica a pasta da conta: primeiro `**/contas/<slug>/` na pasta de trabalho; se não achar, nas
+   skills do negócio instaladas (ex.: `~/.claude/skills/appyon-producao/contas/<slug>/`). O negócio
+   também pode ter regras de produção próprias (ex.: `appyon-producao`): leia antes de seguir.
 2. Defina com o usuário: nicho, idioma, país, formato (vídeo curto, VSL, animação, avatar falando) e
    quantos vídeos (padrão 10). Se ele mandou links, comece por eles.
 

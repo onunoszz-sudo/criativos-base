@@ -10,6 +10,9 @@ pela venda real. Esta skill fecha o ciclo: arquivo organizado, link rastreável 
 
 ## Antes de começar
 1. Confirme que o vídeo passou na `qa-de-criativo` (ou que o usuário aceitou o ATENÇÃO).
+   Onde fica a pasta da conta: primeiro `**/contas/<slug>/` na pasta de trabalho; se não achar, nas
+   skills do negócio instaladas (ex.: `~/.claude/skills/appyon-producao/contas/<slug>/`). O negócio
+   também pode ter regras de produção próprias (ex.: `appyon-producao`): leia antes de seguir.
 2. Leia `contas/<slug>/criativo.md` e `numeros.md` (fonte de verdade das vendas e parâmetro de origem,
    ex.: `sck` da Hotmart ou `utm_content`).
 

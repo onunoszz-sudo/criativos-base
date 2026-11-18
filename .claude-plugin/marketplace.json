@@ -1,13 +1,12 @@
 {
-  "name": "criativos-skills",
+  "name": "criativos-base",
   "owner": {"name": "Pedro Nunes", "url": "https://github.com/onunoszz-sudo"},
   "plugins": [
     {
       "name": "criativos",
-      "source": "./plugins/criativos",
-      "description": "Producao de criativos: pesquisa de referencias, roteiro e copy, geracao de video por IA, edicao por script (montagem, pre-hook, cartao final), QA tecnico e entrega com rastreio.",
-      "version": "0.1.0",
-      "keywords": ["criativos", "video", "anuncios", "seedance", "flow", "ffmpeg"]
+      "source": "./",
+      "description": "Base de producao de criativos, comum a todos os negocios: pesquisa de referencias, roteiro e copy, geracao de video por IA (Seedance, Flow em lote), edicao por script, estado do lote, QA e entrega com rastreio.",
+      "version": "0.2.0"
     }
   ]
 }

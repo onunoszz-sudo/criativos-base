@@ -13,6 +13,9 @@ com o que já se sabe dessas ferramentas e só entrega a cena depois de conferir
 1. Leia `contas/<slug>/criativo.md`: ferramenta, imagem de referência (personagens ou blueprint),
    prefixo de estilo, formato, duração e custo por cena. Leia o roteiro aprovado (cenas e
    `falas.json`) da `roteiro-e-copy`.
+   Onde fica a pasta da conta: primeiro `**/contas/<slug>/` na pasta de trabalho; se não achar, nas
+   skills do negócio instaladas (ex.: `~/.claude/skills/appyon-producao/contas/<slug>/`). O negócio
+   também pode ter regras de produção próprias (ex.: `appyon-producao`): leia antes de seguir.
 2. **Custo antes de gerar:** número de cenas x créditos por cena (mais ~30% de margem para regerar).
    Diga o total e espere o "sim". Sem créditos suficientes, pare: comprar é decisão do usuário.
 3. Use o navegador em que o usuário já está logado. Se a sessão caiu, peça para ele entrar; nunca

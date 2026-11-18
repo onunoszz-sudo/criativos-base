@@ -14,6 +14,9 @@ fácil de pronunciar e entrega junto a copy que vai no anúncio.
    `criativo.md` (idioma, voz, personagens, duração de cena, e a seção "Voz escrita": palavras
    banidas da conta e padrões de gancho) e `vencedores.md`. Sem `criativo.md`,
    crie a partir de `modelos/criativo.md` com o usuário.
+   Onde fica a pasta da conta: primeiro `**/contas/<slug>/` na pasta de trabalho; se não achar, nas
+   skills do negócio instaladas (ex.: `~/.claude/skills/appyon-producao/contas/<slug>/`). O negócio
+   também pode ter regras de produção próprias (ex.: `appyon-producao`): leia antes de seguir.
 2. Defina a base do roteiro: uma ficha da `pesquisa-de-referencias`, um anúncio vencedor (o
    `multiplicador-de-vencedor` diz o que não se mexe) ou uma casa do `mapa-de-angulos`.
 3. Defina duração alvo e formato (mini-novela, avatar falando, pre-hook sem fala, VSL curta).
