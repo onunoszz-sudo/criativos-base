@@ -7,6 +7,13 @@ Lido por todas as skills do pack `criativos`. Fica em `contas/<slug>/criativo.md
 - **Sotaque / voz:** <ex.: espanhol colombiano, voz feminina calma>
 - **Tratamento:** <tú | usted | você>
 
+## Voz escrita (lida pelo gancho e pelo humanizador da `roteiro-e-copy`)
+- **Como a cliente fala:** <palavras e expressões reais de comentários, quiz, mensagens>
+- **Palavras banidas nesta conta:** <além da lista geral; ex.: "sin dolor">
+- **Pergunta no gancho:** <permitida | só a dúvida exata da cliente | não>
+- **Ganchos que funcionam:** <ângulo + exemplo + onde se viu o resultado (anúncio, post, números)>
+- **Ganchos que não funcionam:** <idem>
+
 ## Personagens e referência visual
 - **Imagem de referência:** <caminho, ex.: refs/personagens.png ou o blueprint do avatar>
 - **Personagens:** <nome: descrição visual curta, uma linha por personagem>
