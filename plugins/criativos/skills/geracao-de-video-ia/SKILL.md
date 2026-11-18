@@ -1,6 +1,6 @@
 ---
 name: geracao-de-video-ia
-description: Gera as cenas de um vídeo por IA com personagem consistente - Seedance no Dreamina (Omnirreferência com a imagem dos personagens) e Flow do Google (blueprint do avatar, body swap, Omni Flash em modo Elementos) - pelo navegador já logado do usuário, com custo em créditos dito antes de gerar, download de cada cena e conferência da pronúncia pelo whisper contra o roteiro, regerando a cena que falar errado. Use quando o usuário disser "gera as cenas", "faz no Dreamina", "faz no Seedance", "gera no Flow", "cria o avatar", "blueprint do avatar", "body swap", "regera a cena", "baixa os vídeos do Dreamina".
+description: Gera as cenas de um vídeo por IA com personagem consistente - Seedance no Dreamina (Omnirreferência com a imagem dos personagens) e Flow do Google (blueprint do avatar, body swap, Omni Flash em modo Elementos) - pelo navegador já logado do usuário, com custo em créditos dito antes de gerar, download de cada cena e conferência da pronúncia pelo whisper contra o roteiro, regerando a cena que falar errado. Use quando o usuário disser "gera as cenas", "faz no Dreamina", "faz no Seedance", "gera no Flow", "cria o avatar", "blueprint do avatar", "body swap", "regera a cena", "baixa os vídeos do Dreamina", "gera em lote", "roda a fila de takes".
 ---
 
 # Geração de vídeo por IA
@@ -50,6 +50,35 @@ com o que já se sabe dessas ferramentas e só entrega a cena depois de conferir
   Gere 2 ou 3 versões e escolha os melhores trechos de cada uma.
 - **Prompts por take** (duração, velocidade, câmera): use o gerador da conta se existir (ex.: o
   gerador de animação da Appyon) e cole take a take.
+
+## 2b. Modo lote no Flow (menos tokens, mesmos créditos)
+Para volume (vários takes por dia), não opere o Flow por print e clique: use `scripts/flow_lote.js`.
+Ele roda dentro da aba já logada (Claude in Chrome) e funciona com a interface em inglês ou português.
+1. **Fila:** monte `fila.json` com uma linha por take: `{"id": "noah-h1-t1", "refs": ["noah-blueprint.jpg"],
+   "prompt": "...", "res": "720p", "dur": "8s"}`. As imagens de referência precisam estar no projeto do Flow.
+2. **Injete o script** uma vez na aba do projeto (`javascript_tool` com o conteúdo do arquivo). Recarregou
+   a página: injete de novo.
+3. **Custo antes:** `await flowLote.configurar({...})` devolve o custo de um take. Some a fila inteira
+   (custo × takes × versões) e peça o "sim" para o total. Custos medidos em 2026-11-18 (Omni 1.1 Flash,
+   9:16): 360p 4 s = 4, 8 s = 6, 10 s = 7; 720p 4 s = 7, 8 s = 12, 10 s = 15 créditos.
+4. **Para cada take, uma chamada só:** `await flowLote.limpar(); for (const r of refs) await
+   flowLote.ingrediente(r); await flowLote.preencher(prompt); await flowLote.gerar({limite: N})`.
+   `gerar` recusa se o custo passar do limite aprovado ou se faltar crédito, e nunca aprova gasto sozinho.
+5. **Acompanhar:** `flowLote.listar()` (sem print) até não haver tile com progresso.
+6. **Baixar:** o Chrome só deixa **1 download por aba**. Para cada take, abra uma aba nova no projeto e rode
+   só o trecho de download (não precisa injetar tudo):
+   `const r=x=>(x.getAttribute('aria-label')||x.textContent||'').trim(); const t=[...document.querySelectorAll('flow-grid-tile-container')][I];
+   [...t.querySelectorAll('button')].find(b=>/More options|Mais opções/.test(r(b))).click(); await new Promise(z=>setTimeout(z,600));
+   [...document.querySelectorAll('[role=menuitem]')].find(b=>b.textContent.trim().startsWith('download')).click(); await new Promise(z=>setTimeout(z,800));
+   [...document.querySelectorAll('[role=menuitem]')].find(b=>r(b).startsWith('720p')).click();`
+   Upscale (1080p, 4K) gasta crédito: só com "sim".
+7. **Print só no fim**, para conferir o resultado; a pronúncia segue pelo whisper (passo 3).
+- **Sinais de que o Flow mudou:** "botão de ajustes não encontrado" ou "opção não encontrada". Aí olhe a
+  página uma vez (print ou `read_page`) e ajuste os rótulos no topo do script (bloco `T`).
+- **Crédito acaba por conta Google:** cada conta (uma por avatar) tem o seu saldo. O aviso "créditos
+  insuficientes" aparece quando o saldo não cobre os ajustes atuais.
+- **Não use** os servidores MCP não oficiais do Flow (automatizam com navegador disfarçado e aprovam gasto
+  sozinhos): risco para a conta Google, que guarda Drive e e-mail.
 
 ## 3. Conferência de cada cena
 1. Transcreva com o whisper (idioma da conta) e compare com a fala do roteiro. Rode o
