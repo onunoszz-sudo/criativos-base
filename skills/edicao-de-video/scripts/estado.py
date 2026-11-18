@@ -83,6 +83,8 @@ def caderno_da_conta(pasta, conta):
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     if len(sys.argv) < 3:
         sys.exit(__doc__)
     pasta, cmd, args = sys.argv[1], sys.argv[2], sys.argv[3:]

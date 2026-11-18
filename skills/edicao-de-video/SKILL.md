@@ -112,3 +112,5 @@ O script do formato ajusta cada camada para bater no alvo e mostra o ganho aplic
 - Música de terceiros só com a alteração da receita (velocidade e tom) e sabendo do risco; música
   livre de direitos é sempre a opção mais segura.
 - O vídeo antigo não é apagado nem sobrescrito sem o "sim" do usuário: salve com sufixo de versão.
+- **Mudou um script que já funciona?** Rode de novo a receita de um vídeo aprovado e compare com o
+  aprovado (ex.: md5 do áudio). Mudança que ninguém pediu é bug.
