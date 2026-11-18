@@ -51,10 +51,11 @@ demais. Por isso:
 3. **Prenda o som ao quadro da ação**: no bloco `foley`, `ancora` é o instante do estalo no arquivo
    do som e `ponto` é o quadro da ação na cena (tempo do arquivo da cena). O script converte para o
    tempo do vídeo final, já com a velocidade.
-4. **Ação com som fica em 1x**; acelerar o trecho distorce o som.
-5. **Dois sons fortes nunca no mesmo instante** (ex.: porta batendo em cima do snap): o mais fraco
+4. **Prefira o trecho em que imagem e som vêm do mesmo take**: o som já cai no quadro certo. Junte trechos de takes diferentes quando um deles tem a física mais realista.
+5. **Ação com som fica em 1x**; acelerar o trecho distorce o som.
+6. **Dois sons fortes nunca no mesmo instante** (ex.: porta batendo em cima do snap): o mais fraco
    some. Deixe pelo menos 0,2 s entre eles.
-6. **Não invente som sintético** de ação (areia, canela caindo): chiado falso soa pior do que
+7. **Não invente som sintético** de ação (areia, canela caindo): chiado falso soa pior do que
    silêncio. Sem som real, deixe sem.
 
 ## Níveis: iguais aos da referência

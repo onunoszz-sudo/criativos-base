@@ -34,6 +34,7 @@ O script devolve código 1 quando algo NÃO PASSA. Rode também em cada cena ger
 Extraia um quadro a cada 2 a 3 s e o último (`ffmpeg -vf fps=0.5,scale=240:-1,tile=6x2`) e olhe:
 - personagem igual em todas as cenas (rosto, roupa, tatuagem);
 - nenhum texto, marca d'água ou selo de IA indesejado;
+- física realista: pó ou líquido caindo forma monte ou poça, sem nuvem de poeira subindo (defeito comum do Flow); se um take exagera, procure o mesmo trecho em outro take antes de regerar;
 - legenda legível e fora da área do botão e da legenda do post do Reels (faixa de baixo ~20% e lateral
   direita);
 - faixa do topo sem cobrir rosto ou balão de fala;

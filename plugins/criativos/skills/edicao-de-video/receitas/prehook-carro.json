@@ -15,23 +15,30 @@
    "som_db": null
   },
   {
-   "arquivo": "takes/take1.mp4",
-   "inicio": 1.4,
-   "fim": 3.4,
+   "arquivo": "takes/take3.mp4",
+   "inicio": 3.6,
+   "fim": 4.3,
    "velocidade": 1.0,
    "som_db": null
   },
   {
-   "arquivo": "takes/take1.mp4",
-   "inicio": 3.4,
-   "fim": 4.45,
+   "arquivo": "takes/take3.mp4",
+   "inicio": 4.3,
+   "fim": 6.35,
    "velocidade": 1.0,
    "som_db": null
   },
   {
-   "arquivo": "takes/take1.mp4",
-   "inicio": 4.45,
-   "fim": 5.05,
+   "arquivo": "takes/take3.mp4",
+   "inicio": 6.35,
+   "fim": 7.05,
+   "velocidade": 1.0,
+   "som_db": null
+  },
+  {
+   "arquivo": "takes/take3.mp4",
+   "inicio": 7.05,
+   "fim": 7.7,
    "velocidade": 1.0,
    "som_db": null
   },
@@ -68,7 +75,7 @@
    "fim": 3.98,
    "ancora": 3.85,
    "cena": 2,
-   "ponto": 1.47,
+   "ponto": 3.85,
    "db": -5
   },
   {
@@ -77,8 +84,8 @@
    "inicio": 6.7,
    "fim": 7.02,
    "ancora": 6.82,
-   "cena": 3,
-   "ponto": 3.98,
+   "cena": 4,
+   "ponto": 6.82,
    "db": 0
   },
   {
@@ -87,8 +94,8 @@
    "inicio": 7.46,
    "fim": 7.86,
    "ancora": 7.55,
-   "cena": 4,
-   "ponto": 4.55,
+   "cena": 5,
+   "ponto": 7.55,
    "db": -2
   },
   {
@@ -97,8 +104,8 @@
    "inicio": 7.58,
    "fim": 7.86,
    "ancora": 7.65,
-   "cena": 4,
-   "ponto": 4.9,
+   "cena": 5,
+   "ponto": 7.25,
    "db": -5
   },
   {
@@ -107,7 +114,7 @@
    "inicio": 7.1,
    "fim": 7.55,
    "ancora": 7.2,
-   "cena": 5,
+   "cena": 6,
    "ponto": 7.2,
    "db": -1,
    "filtro": "afftdn=nf=-45"
