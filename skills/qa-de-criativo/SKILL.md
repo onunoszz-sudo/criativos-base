@@ -66,3 +66,19 @@ Faltou som de ação que a referência tem: NÃO PASSA.
 - Só lê. Não corrige o arquivo, não sobe nada.
 - Vídeo com NÃO PASSA não vai para a `entrega-de-criativo` sem o "sim" explícito do usuário sabendo
   do defeito.
+
+## Takes de fala gerados por IA (antes de montar)
+Erros que passam numa conferência rápida e o cliente pega: palavra repetida no fim do take, ordem das
+palavras trocada, palavra a mais ("if"), sotaque diferente num take, voz diferente no primeiro take,
+segunda mão aparecendo na selfie.
+```
+python -I scripts/conferir_takes.py <pasta_takes> --falas falas.json --refs <pasta_imagens_base>
+```
+- Descobre de qual avatar/cena é cada take pelo primeiro quadro (o take começa na imagem base) e
+  compara a transcrição com o roteiro palavra por palavra. Qualquer diferença: refazer o take.
+- **Referência sempre do roteiro**, nunca da transcrição de um take (já deixou passar frase trocada).
+- O Whisper junta a repetição na última palavra: última palavra com mais de 0,6 s ou dois picos de
+  energia nela = repetição. No fim, depois de pausa, dá para cortar; no meio, refazer.
+- Voz: distância do espectro médio de cada take contra os outros do mesmo vídeo; o take que fica bem
+  acima dos demais soa como "outra voz". Sotaque não aparece nessa medida: pedir para o usuário ouvir.
+- Folha de 8 quadros por take, um take por linha, para ver mão, roupa e tatuagem.

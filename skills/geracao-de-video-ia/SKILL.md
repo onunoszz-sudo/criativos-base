@@ -114,3 +114,19 @@ Ele roda dentro da aba já logada (Claude in Chrome) e funciona com a interface 
 - Nunca digitar senha, aceitar termos ou comprar crédito pelo usuário.
 - Não declarar IA no anúncio se o `marca.md` decidiu assim; seguir as regras da plataforma de vídeo.
 - Personagem não pode copiar o rosto de uma pessoa real identificável.
+
+## Flow pelo Agente (em vez do lote por script)
+- Padrões do Agente: Omni Flash, 9:16, x1; confirmar antes de gerar. Aprovar cada proposta com
+  "Approve" (nunca "Always approve") e conferir que só ele ficou marcado.
+- Um pedido por mensagem, com a imagem anexada pelo "+" (frame inicial nas falas, elemento/referência
+  no hook). Mandar outra mensagem enquanto ele processa cancela a anterior.
+- Várias falas num pedido: BLOCO 1 completo e os outros como "SAME PROMPT AS BLOCO 1, except: clip N;
+  fala; tempo". O Agente propõe em lotes e cada lote pede aprovação.
+- Conversa longa dá "Something went wrong": sessão nova por avatar.
+- "High demand" e "couldn't check your credits" não cobram; o Retry do card costuma falhar de novo.
+  Refazer pelo Agente só os blocos que faltam.
+- Baixar pelo menu do card (Download → 720p); o nome do arquivo não diz qual cena é, então identificar
+  pelo primeiro quadro e pela transcrição (`qa-de-criativo/scripts/conferir_takes.py`).
+- Prompt de selfie: "films himself in handheld selfie mode the whole clip: one arm always extended
+  holding the phone (out of frame), never lets go of the phone"; e "ACCENT LOCK" com o sotaque
+  desejado em todo take de fala.
