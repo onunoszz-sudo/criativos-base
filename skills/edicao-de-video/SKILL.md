@@ -114,3 +114,13 @@ O script do formato ajusta cada camada para bater no alvo e mostra o ganho aplic
 - O vídeo antigo não é apagado nem sobrescrito sem o "sim" do usuário: salve com sufixo de versão.
 - **Mudou um script que já funciona?** Rode de novo a receita de um vídeo aprovado e compare com o
   aprovado (ex.: md5 do áudio). Mudança que ninguém pediu é bug.
+
+## Gancho por cortes (sem acelerar ação)
+- Ação importante (abrir pote, despejar, enrolar nota) fica em 1,0x e é encurtada só com corte;
+  deslocamento pode ir a 1,2x. Gancho de várias etapas até 8 s, os outros até 6,5 s.
+- `scripts/hook_cortes.py bruto.mp4 saida.mp4 "0.30-1.50@1.2" "3.00-3.80@1.0" "5.50-7.70@1.0"` monta
+  os trechos em 24 fps 720x1280, com ganho de ASMR e fade para branco no fim (flash).
+- Pontos de corte: folha de quadros a 4 fps do take bruto (`ffmpeg -vf fps=4,tile=13x2`).
+- Legenda das falas na linha do olhar, logo abaixo do queixo (medir num quadro real; muda com o
+  enquadramento). Headline no topo durante o gancho, sem cobrir a ação.
+- Nivelar o volume de cada take na mediana dos outros antes de montar (take mais alto soa como outra voz).
